@@ -44,24 +44,13 @@ public class Journal
                     }
                     break;
                 case 3:
-                    Console.WriteLine("Loading from the file!");
-                    string filename = "journal.txt";
-                    string[] lines = System.IO.File.ReadAllLines(filename);
-
-                    // Here, you might want to convert lines back to `Entry` objects and add them to the `entries` list.
+                  Console.WriteLine("Loading from the file!");
+                  LoadFromFile();
 
                     break;
                 case 4:
-                    Console.WriteLine("Saving the file!");
-                    string file = "journal.txt";
-
-                    using (StreamWriter outputFile = new StreamWriter(file))
-                    {
-                        foreach (Entry ent in entries)
-                        {
-                            outputFile.WriteLine("Date:" + ent.GetDateTime() + " Answer: " + ent.getEntry());
-                        }
-                    }
+                   Console.WriteLine("Saving to the file!");
+                   SaveToFile();
                     break;
                 case 5:
                     isRunning = false;
@@ -69,6 +58,34 @@ public class Journal
                 default:
                     break;
             }
+        }
+    }
+    public void SaveToFile()
+    {
+        string file = "journal.txt";
+        using (StreamWriter outputFile = new StreamWriter(file))
+        {
+            foreach (Entry ent in entries)
+            {
+                outputFile.WriteLine(ent.GetDateTime().ToString("o"));
+                outputFile.WriteLine(ent.getEntry());
+            }
+        }
+    }
+    public void LoadFromFile()
+    {
+        string filename = "journal.txt";
+        if (!File.Exists(filename)) return;
+        
+        string[] lines = File.ReadAllLines(filename);
+
+        entries.Clear();
+        for (int i = 0; i < lines.Length; i += 2)
+        {
+            DateTime entryDate = DateTime.Parse(lines[i]);
+            string entryContent = lines[i + 1];
+
+            entries.Add(new Entry(entryDate, entryContent));
         }
     }
 }
