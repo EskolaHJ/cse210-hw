@@ -35,7 +35,7 @@ public class Journal
                     string selected_question = questions[num_question];
                     Console.WriteLine(selected_question);
                     string answer = Console.ReadLine();
-                    entries.Add(new Entry(answer));
+                    entries.Add(new Entry(selected_question, answer));
                     break;
                 case 2:
                     foreach (Entry ent in entries)
@@ -69,6 +69,7 @@ public class Journal
             {
                 outputFile.WriteLine(ent.GetDateTime().ToString("o"));
                 outputFile.WriteLine(ent.getEntry());
+                outputFile.WriteLine(ent.GetPrompt());
             }
         }
     }
@@ -83,9 +84,10 @@ public class Journal
         for (int i = 0; i < lines.Length; i += 2)
         {
             DateTime entryDate = DateTime.Parse(lines[i]);
-            string entryContent = lines[i + 1];
+            string entryPrompt = lines[i +1];
+            string entryContent = lines[i + 2];
 
-            entries.Add(new Entry(entryDate, entryContent));
+            entries.Add(new Entry(entryDate, entryPrompt, entryContent));
         }
     }
 }
