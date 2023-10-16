@@ -5,8 +5,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Journal myJournal = new Journal();
-        myJournal.menuDisplay();
+        JournalMenu menu = new JournalMenu();
+        menu.DisplayMenu();
         Console.ReadLine();
     }
 }

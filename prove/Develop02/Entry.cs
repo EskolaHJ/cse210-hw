@@ -1,21 +1,15 @@
 using System;
-using System.Formats.Asn1;
-using System.Runtime.InteropServices;
-using System.Text;
+
 public class Entry
 {
-    public string _entry;
+    private string _entry;
+    private string _prompt;
     public DateTime date { get; set; } = DateTime.Now;
 
-    public Entry(string answer)
-    {
-        this._entry = answer;
-    }
-
-    // Additional constructor to load from file
-    public Entry(DateTime date, string answer)
+    public Entry(DateTime date, string prompt, string answer)
     {
         this.date = date;
+        this._prompt = prompt;
         this._entry = answer;
     }
 
@@ -24,7 +18,12 @@ public class Entry
         return this.date;
     }
 
-    public string getEntry()
+    public string GetPrompt()
+    {
+        return this._prompt;
+    }
+
+    public string GetEntry()
     {
         return this._entry;
     }
