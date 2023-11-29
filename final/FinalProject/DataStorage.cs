@@ -39,11 +39,11 @@ public class DataStorage
                     var fields = line.Split(',');
                     if (fields[0] == "Income")
                     {
-                        records.Add(new Income(decimal.Parse(fields[1]), DateTime.Parse(fields[2]), fields[4], fields[3]));
+                        records.Add(new Income(decimal.Parse(fields[1]), DateTime.Parse(fields[2]), fields[4], fields[3]) { IsNew = false });
                     }
                     else if (fields[0] == "Expense")
                     {
-                        records.Add(new Expense(decimal.Parse(fields[1]), DateTime.Parse(fields[2]), fields[4], fields[3]));
+                        records.Add(new Expense(decimal.Parse(fields[1]), DateTime.Parse(fields[2]), fields[4], fields[3]) { IsNew = false });
                     }
                 }
             }

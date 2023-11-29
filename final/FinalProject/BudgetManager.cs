@@ -16,19 +16,26 @@ public class BudgetManager
     public void AddIncome(Income income)
     {
         Incomes.Add(income);
-        TotalBalance += income.Amount;
+        if (income.IsNew)
+        {
+            TotalBalance += income.Amount;
+        }
     }
 
     public void AddExpense(Expense expense)
     {
         Expenses.Add(expense);
-        TotalBalance -= expense.Amount;
+        if (expense.IsNew)
+        {
+            TotalBalance -= expense.Amount;
+        }
     }
 
     public decimal GetTotalBalance()
     {
         return TotalBalance;
     }
+
     public List<Income> GetAllIncomes()
     {
         return new List<Income>(Incomes);
@@ -38,7 +45,4 @@ public class BudgetManager
     {
         return new List<Expense>(Expenses);
     }
-    // Additional methods for managing budgets could be added here.
-    // For example, methods to remove or modify existing income/expense records,
-    // methods to get reports based on categories or dates, etc.
 }
